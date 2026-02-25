@@ -1,0 +1,748 @@
+{
+  "existingCalendars": {
+    "calendars": [
+      {
+        "id": "By40BqCvIw3l9uR4HkfO",
+        "locationId": "nxqqghvIaX9QQEUaBgwM",
+        "teamMembers": [
+          {
+            "priority": 0.5,
+            "selected": true,
+            "userId": "L27hbdfgcqdegVvQ1wtw",
+            "isZoomAdded": "false",
+            "locationConfigurations": [
+              {
+                "kind": "custom",
+                "location": "",
+                "position": 0,
+                "zoomOauthId": "",
+                "meetingId": "custom_0"
+              }
+            ]
+          }
+        ],
+        "eventType": "RoundRobin_OptimizeForAvailability",
+        "name": "Ana Alice's Personal Calendar",
+        "description": "",
+        "widgetSlug": "ana-alice-personal-calendar-mdphsl0xe",
+        "calendarType": "personal",
+        "eventTitle": "{{contact.name}}",
+        "eventColor": "#039BE5",
+        "slotDuration": 30,
+        "slotDurationUnit": "mins",
+        "slotInterval": 30,
+        "slotIntervalUnit": "mins",
+        "slotBufferUnit": "mins",
+        "appoinmentPerSlot": 1,
+        "openHours": [
+          {
+            "daysOfTheWeek": [
+              1
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              2
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              3
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              4
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              5
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          }
+        ],
+        "enableRecurring": false,
+        "autoConfirm": true,
+        "googleInvitationEmails": true,
+        "allowReschedule": true,
+        "allowCancellation": true,
+        "formSubmitType": "ThankYouMessage",
+        "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+        "availabilities": [],
+        "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+        "preBufferUnit": "mins",
+        "isActive": true
+      },
+      {
+        "id": "YSZeG5Gs1nAF5NUxdorc",
+        "locationId": "nxqqghvIaX9QQEUaBgwM",
+        "teamMembers": [
+          {
+            "priority": 0.5,
+            "selected": true,
+            "userId": "m3aE7GQAClvYLerEgbD9",
+            "isZoomAdded": "false",
+            "locationConfigurations": [
+              {
+                "kind": "custom",
+                "location": "",
+                "position": 0,
+                "zoomOauthId": "",
+                "meetingId": "custom_0"
+              }
+            ]
+          }
+        ],
+        "eventType": "RoundRobin_OptimizeForAvailability",
+        "name": "Carlos H M Mororo's Personal Calendar",
+        "description": "",
+        "widgetSlug": "carlos-h-m-mororo-personal-calendar-mgoxr_osxt",
+        "calendarType": "personal",
+        "eventTitle": "{{contact.name}}",
+        "eventColor": "#039BE5",
+        "slotDuration": 30,
+        "slotDurationUnit": "mins",
+        "slotInterval": 30,
+        "slotIntervalUnit": "mins",
+        "slotBufferUnit": "mins",
+        "appoinmentPerSlot": 1,
+        "openHours": [
+          {
+            "daysOfTheWeek": [
+              1
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              2
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              3
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              4
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              5
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          }
+        ],
+        "enableRecurring": false,
+        "autoConfirm": true,
+        "googleInvitationEmails": true,
+        "allowReschedule": true,
+        "allowCancellation": true,
+        "formSubmitType": "ThankYouMessage",
+        "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+        "availabilities": [],
+        "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+        "preBufferUnit": "mins",
+        "isActive": true
+      },
+      {
+        "id": "bAcWBHSCVilxZtT1opWC",
+        "locationId": "nxqqghvIaX9QQEUaBgwM",
+        "teamMembers": [
+          {
+            "priority": 0.5,
+            "selected": true,
+            "userId": "6JeCKT8qOl1UGIegjnDJ",
+            "isZoomAdded": "false",
+            "locationConfigurations": [
+              {
+                "kind": "custom",
+                "location": "",
+                "position": 0,
+                "zoomOauthId": "",
+                "meetingId": "custom_0"
+              }
+            ]
+          }
+        ],
+        "eventType": "RoundRobin_OptimizeForAvailability",
+        "name": "Priscila Araújo's Personal Calendar",
+        "description": "",
+        "widgetSlug": "priscila-arajo-personal-calendar-yuuuikypn",
+        "calendarType": "personal",
+        "eventTitle": "{{contact.name}}",
+        "eventColor": "#039BE5",
+        "slotDuration": 30,
+        "slotDurationUnit": "mins",
+        "slotInterval": 30,
+        "slotIntervalUnit": "mins",
+        "slotBufferUnit": "mins",
+        "appoinmentPerSlot": 1,
+        "openHours": [
+          {
+            "daysOfTheWeek": [
+              1
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              2
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              3
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              4
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              5
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          }
+        ],
+        "enableRecurring": false,
+        "autoConfirm": true,
+        "googleInvitationEmails": true,
+        "allowReschedule": true,
+        "allowCancellation": true,
+        "formSubmitType": "ThankYouMessage",
+        "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+        "availabilities": [],
+        "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+        "preBufferUnit": "mins",
+        "isActive": true
+      },
+      {
+        "id": "d7uN5BGBR7XYTFniLYvD",
+        "locationId": "nxqqghvIaX9QQEUaBgwM",
+        "teamMembers": [
+          {
+            "priority": 0.5,
+            "selected": true,
+            "userId": "xRtGXUfqWeLHGZdcmkwk",
+            "isZoomAdded": "false",
+            "locationConfigurations": [
+              {
+                "kind": "custom",
+                "location": "",
+                "position": 0,
+                "zoomOauthId": "",
+                "meetingId": "custom_0"
+              }
+            ]
+          }
+        ],
+        "eventType": "RoundRobin_OptimizeForAvailability",
+        "name": "Graziele Nobre's Personal Calendar",
+        "description": "",
+        "widgetSlug": "graziele-nobre-personal-calendar-6wxzwj2-k",
+        "calendarType": "personal",
+        "eventTitle": "{{contact.name}}",
+        "eventColor": "#039BE5",
+        "slotDuration": 30,
+        "slotDurationUnit": "mins",
+        "slotInterval": 30,
+        "slotIntervalUnit": "mins",
+        "slotBufferUnit": "mins",
+        "appoinmentPerSlot": 1,
+        "openHours": [
+          {
+            "daysOfTheWeek": [
+              1
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              2
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              3
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              4
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              5
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          }
+        ],
+        "enableRecurring": false,
+        "autoConfirm": true,
+        "googleInvitationEmails": true,
+        "allowReschedule": true,
+        "allowCancellation": true,
+        "formSubmitType": "ThankYouMessage",
+        "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+        "availabilities": [],
+        "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+        "preBufferUnit": "mins",
+        "isActive": true
+      },
+      {
+        "id": "hhu0nyuE25lWv1VRM3wT",
+        "locationId": "nxqqghvIaX9QQEUaBgwM",
+        "teamMembers": [
+          {
+            "priority": 0.5,
+            "selected": true,
+            "userId": "4CKb592QFUg5Ut2sR4on",
+            "isZoomAdded": "false",
+            "locationConfigurations": [
+              {
+                "kind": "custom",
+                "location": "",
+                "position": 0,
+                "zoomOauthId": "",
+                "meetingId": "custom_0"
+              }
+            ]
+          }
+        ],
+        "eventType": "RoundRobin_OptimizeForAvailability",
+        "name": "Gleniany Frota's Personal Calendar",
+        "description": "",
+        "widgetSlug": "gleniany-frota-personal-calendar-d6qubne22",
+        "calendarType": "personal",
+        "eventTitle": "{{contact.name}}",
+        "eventColor": "#039BE5",
+        "slotDuration": 30,
+        "slotDurationUnit": "mins",
+        "slotInterval": 30,
+        "slotIntervalUnit": "mins",
+        "slotBufferUnit": "mins",
+        "appoinmentPerSlot": 1,
+        "openHours": [
+          {
+            "daysOfTheWeek": [
+              1
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              2
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              3
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              4
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              5
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 17,
+                "closeMinute": 0
+              }
+            ]
+          }
+        ],
+        "enableRecurring": false,
+        "autoConfirm": true,
+        "googleInvitationEmails": true,
+        "allowReschedule": true,
+        "allowCancellation": true,
+        "formSubmitType": "ThankYouMessage",
+        "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+        "availabilities": [],
+        "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+        "preBufferUnit": "mins",
+        "isActive": true
+      }
+    ],
+    "traceId": "7139f3e6-6eae-4d17-a504-8f5c178b3dd3"
+  },
+  "roundRobin": {
+    "status": 422,
+    "body": {
+      "message": [
+        "property roundRobinConfig should not exist"
+      ],
+      "error": "Unprocessable Entity",
+      "statusCode": 422,
+      "traceId": "e0cc39ec-2c88-422f-a2a8-9f9ad08bd488"
+    }
+  },
+  "roundRobinAlt": {
+    "status": 201,
+    "body": {
+      "calendar": {
+        "id": "kSGB8BKgXk5GAqtpTI7Y",
+        "locationId": "nxqqghvIaX9QQEUaBgwM",
+        "teamMembers": [
+          {
+            "priority": 0.5,
+            "selected": true,
+            "userId": "xRtGXUfqWeLHGZdcmkwk",
+            "meetingLocationType": "custom",
+            "meetingLocation": "",
+            "isZoomAdded": "false",
+            "locationConfigurations": [
+              {
+                "kind": "custom",
+                "location": "",
+                "position": 0,
+                "zoomOauthId": "",
+                "meetingId": "custom_0"
+              }
+            ]
+          },
+          {
+            "priority": 0.5,
+            "selected": true,
+            "userId": "6JeCKT8qOl1UGIegjnDJ",
+            "meetingLocationType": "custom",
+            "meetingLocation": "",
+            "isZoomAdded": "false",
+            "locationConfigurations": [
+              {
+                "kind": "custom",
+                "location": "",
+                "position": 1,
+                "zoomOauthId": "",
+                "meetingId": "custom_0"
+              }
+            ]
+          },
+          {
+            "priority": 0.5,
+            "selected": true,
+            "userId": "4CKb592QFUg5Ut2sR4on",
+            "meetingLocationType": "custom",
+            "meetingLocation": "",
+            "isZoomAdded": "false",
+            "locationConfigurations": [
+              {
+                "kind": "custom",
+                "location": "",
+                "position": 2,
+                "zoomOauthId": "",
+                "meetingId": "custom_0"
+              }
+            ]
+          },
+          {
+            "priority": 0.5,
+            "selected": true,
+            "userId": "L27hbdfgcqdegVvQ1wtw",
+            "meetingLocationType": "custom",
+            "meetingLocation": "",
+            "isZoomAdded": "false",
+            "locationConfigurations": [
+              {
+                "kind": "custom",
+                "location": "",
+                "position": 3,
+                "zoomOauthId": "",
+                "meetingId": "custom_0"
+              }
+            ]
+          }
+        ],
+        "eventType": "RoundRobin_OptimizeForAvailability",
+        "name": "Distribuicao Comercial | Round Robin",
+        "description": "Distribuicao automatica de leads entre equipe comercial",
+        "calendarType": "round_robin",
+        "eventTitle": "{{contact.name}}",
+        "eventColor": "#039BE5",
+        "slotDuration": 30,
+        "slotDurationUnit": "mins",
+        "slotInterval": 30,
+        "slotIntervalUnit": "mins",
+        "slotBufferUnit": "mins",
+        "appoinmentPerSlot": 1,
+        "openHours": [
+          {
+            "daysOfTheWeek": [
+              1
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 18,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              2
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 18,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              3
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 18,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              4
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 18,
+                "closeMinute": 0
+              }
+            ]
+          },
+          {
+            "daysOfTheWeek": [
+              5
+            ],
+            "hours": [
+              {
+                "openHour": 8,
+                "openMinute": 0,
+                "closeHour": 18,
+                "closeMinute": 0
+              }
+            ]
+          }
+        ],
+        "enableRecurring": false,
+        "autoConfirm": true,
+        "googleInvitationEmails": true,
+        "allowReschedule": true,
+        "allowCancellation": true,
+        "formSubmitType": "ThankYouMessage",
+        "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+        "availabilities": [],
+        "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+        "preBufferUnit": "mins",
+        "isActive": true
+      },
+      "traceId": "2dcde40c-7b5f-4a71-a755-4689cdd8c160"
+    }
+  }
+}

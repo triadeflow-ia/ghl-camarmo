@@ -1,0 +1,42 @@
+{
+  "monetaryFix": [
+    {
+      "name": "Faixa Salarial Estimada",
+      "status": 201
+    },
+    {
+      "name": "Pretensão Salarial",
+      "status": 201
+    },
+    {
+      "name": "Valor Estimado do Contrato",
+      "status": 201
+    },
+    {
+      "name": "Valor Total do Contrato",
+      "status": 201
+    },
+    {
+      "name": "Receita Mensal Prevista",
+      "status": 201
+    }
+  ],
+  "pipelines": [
+    {
+      "name": "Comercial | Recrutamento",
+      "status": 401
+    },
+    {
+      "name": "Comercial | C-Partner",
+      "status": 401
+    },
+    {
+      "name": "Comercial | Comunidades",
+      "status": 401
+    },
+    {
+      "name": "Comercial | Link",
+      "status": 401
+    }
+  ]
+}

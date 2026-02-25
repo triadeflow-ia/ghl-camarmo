@@ -1,0 +1,74 @@
+{
+  "deletePipeline": {
+    "status": 401,
+    "body": {
+      "statusCode": 401,
+      "message": "The token is not authorized for this scope."
+    }
+  },
+  "removeTag": {
+    "status": 200,
+    "body": {
+      "succeded": true,
+      "contact": {
+        "id": "quAF4vhVgXIoZGXtu6HU",
+        "dateAdded": "2026-02-25T05:11:02.046Z",
+        "type": "lead",
+        "locationId": "nxqqghvIaX9QQEUaBgwM",
+        "firstName": "Carlos",
+        "firstNameLowerCase": "carlos",
+        "fullNameLowerCase": "carlos mendes [teste]",
+        "lastName": "Mendes [TESTE]",
+        "lastNameLowerCase": "mendes [teste]",
+        "email": "carlos.teste@empresa.com.br",
+        "emailLowerCase": "carlos.teste@empresa.com.br",
+        "phone": "+5511999990001",
+        "country": "BR",
+        "source": "Triadeflow CRM Setup",
+        "companyName": "TechStar Ltda",
+        "createdBy": {
+          "source": "INTEGRATION",
+          "channel": "OAUTH",
+          "sourceId": "699e65b33430d32884cec042",
+          "timestamp": "2026-02-25T05:11:02.046Z"
+        },
+        "dateUpdated": "2026-02-25T07:29:31.395Z",
+        "tags": [
+          "produto_recrutamento",
+          "lead_novo"
+        ],
+        "followers": [],
+        "customFields": [],
+        "additionalEmails": [],
+        "additionalPhones": []
+      },
+      "traceId": "65464570-0066-49b9-9893-4ae3fb61b10c"
+    }
+  },
+  "remainingPipelines": [
+    {
+      "name": "Comercial | C-Partner",
+      "id": "fm4C63aYMg7vQJtSFYpR"
+    },
+    {
+      "name": "Comercial | Comunidades",
+      "id": "n26Zb3bUhegRloqYfgXH"
+    },
+    {
+      "name": "Comercial | Link",
+      "id": "VaioYeq51cLPf9Z7c0OM"
+    },
+    {
+      "name": "Comercial | Recrutamento",
+      "id": "G2RrDeluWxQxOX4KDrIK"
+    },
+    {
+      "name": "Marketing Pipeline",
+      "id": "cqpZMpcihsC1IPLFgCHm"
+    },
+    {
+      "name": "Nutrição | Reativação",
+      "id": "NA0KFHGf4MP4lNrHbQcd"
+    }
+  ]
+}

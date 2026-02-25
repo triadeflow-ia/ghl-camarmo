@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Graziele Nobre",
+    "email": "graziele@triadeflow.com.br",
+    "status": 400,
+    "error": "A user with this email already exists."
+  },
+  {
+    "name": "Priscila Araújo",
+    "email": "priscila@triadeflow.com.br",
+    "status": 400,
+    "error": "A user with this email already exists."
+  },
+  {
+    "name": "Gleniany Frota",
+    "email": "gleniany@triadeflow.com.br",
+    "status": 400,
+    "error": "A user with this email already exists."
+  },
+  {
+    "name": "Ana Alice",
+    "email": "anaalice@triadeflow.com.br",
+    "status": 201,
+    "id": "L27hbdfgcqdegVvQ1wtw"
+  }
+]
