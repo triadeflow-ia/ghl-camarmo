@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM V1 — Grupo Camarmo | Triadeflow</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --navy: #080C43;
+    --navy-mid: #103363;
+    --navy-light: #051838;
+    --blue: #116DFF;
+    --cyan: #00D1FF;
+    --cyan-light: #94D9F6;
+    --white: #FFFFFF;
+    --gray-light: #F2F2F2;
+    --gray: #E8E8E8;
+    --text-dark: #242323;
+    --text-muted: #6B7280;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-dark); background: var(--white); line-height: 1.6; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy-light) 100%);
+    color: var(--white); padding: 60px 60px 80px; min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before { content:''; position:absolute; top:-50%; right:-20%; width:600px; height:600px; background:radial-gradient(circle,rgba(0,209,255,0.08) 0%,transparent 70%); border-radius:50%; }
+  .hero-content { position:relative; z-index:1; max-width:1200px; margin:0 auto; width:100%; }
+  .hero-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:60px; }
+  .hero-logos { display:flex; align-items:center; gap:16px; }
+  .hero-logo { height: 48px; }
+  .camarmo-logo { height: 52px; filter: brightness(0) invert(1); }
+  .logo-divider { width:1px; height:36px; background:rgba(255,255,255,0.2); }
+  .hero-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; margin-left: 24px; transition: color 0.2s; }
+  .hero-links a:hover { color: var(--cyan); }
+  .hero-badge { display:inline-block; background:rgba(0,209,255,0.15); border:1px solid rgba(0,209,255,0.3); color:var(--cyan); padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; letter-spacing:1px; text-transform:uppercase; margin-bottom:24px; }
+  .hero h1 { font-size:52px; font-weight:800; line-height:1.1; margin-bottom:16px; }
+  .hero h1 span { color: var(--cyan); }
+  .hero p.subtitle { font-size:20px; font-weight:300; color:rgba(255,255,255,0.7); max-width:600px; margin-bottom:40px; }
+  .hero-stats { display:flex; gap:48px; flex-wrap:wrap; }
+  .hero-stat .number { font-size:48px; font-weight:800; color:var(--cyan); line-height:1; }
+  .hero-stat .label { font-size:14px; color:rgba(255,255,255,0.6); margin-top:4px; }
+  .hero-footer { position:absolute; bottom:30px; left:60px; right:60px; display:flex; justify-content:space-between; z-index:1; }
+  .hero-footer span { font-size:13px; color:rgba(255,255,255,0.4); }
+  .hero-footer a { color:rgba(255,255,255,0.4); text-decoration:none; }
+
+  /* SECTIONS */
+  section { padding:80px 60px; max-width:1200px; margin:0 auto; }
+  .section-full { max-width:none; background:var(--gray-light); }
+  .section-full .inner { max-width:1200px; margin:0 auto; }
+  .section-title { font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin-bottom:8px; }
+  .section-heading { font-size:36px; font-weight:700; color:var(--navy); margin-bottom:40px; line-height:1.2; }
+  .divider { height:1px; background:var(--gray); max-width:1200px; margin:0 auto; }
+
+  /* GRID CARDS */
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
+  .card { background:var(--white); border:1px solid var(--gray); border-radius:16px; padding:32px; transition:all 0.2s; }
+  .card:hover { border-color:var(--cyan-light); box-shadow:0 8px 24px rgba(8,12,67,0.06); transform:translateY(-2px); }
+  .card-icon { width:48px; height:48px; background:linear-gradient(135deg,var(--navy),var(--navy-mid)); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:16px; }
+  .card h3 { font-size:18px; font-weight:600; color:var(--navy); margin-bottom:8px; }
+  .card p { font-size:14px; color:var(--text-muted); line-height:1.5; }
+  .card .metric { font-size:32px; font-weight:800; color:var(--navy); margin-bottom:4px; }
+
+  /* FUNNEL */
+  .funnel-wrapper { display: flex; flex-direction: column; gap: 32px; }
+  .funnel-item { display: flex; align-items: flex-start; gap: 24px; }
+  .funnel-visual { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 120px; }
+  .funnel-bar {
+    height: 8px; border-radius: 4px; transition: all 0.3s;
+    background: linear-gradient(90deg, var(--navy), var(--blue));
+  }
+  .funnel-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; text-align: center; }
+  .funnel-content { flex: 1; }
+  .funnel-content h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .funnel-stages { display: flex; gap: 6px; flex-wrap: wrap; }
+  .stage { background:var(--gray-light); color:var(--text-dark); padding:5px 14px; border-radius:8px; font-size:12px; font-weight:500; white-space:nowrap; border: 1px solid var(--gray); }
+  .stage-arrow { color:var(--cyan); font-weight:700; font-size:16px; display:flex; align-items:center; }
+  .funnel-nutricao .funnel-bar { background: linear-gradient(90deg, var(--cyan), var(--blue)); }
+  .funnel-nutricao .stage { background: rgba(0,209,255,0.08); border-color: rgba(0,209,255,0.2); color: var(--navy); }
+
+  /* WORKFLOW TABLE */
+  .wf-table { width:100%; border-collapse:separate; border-spacing:0; border-radius:12px; overflow:hidden; border:1px solid var(--gray); }
+  .wf-table th { background:var(--navy); color:var(--white); padding:14px 20px; text-align:left; font-size:13px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; }
+  .wf-table td { padding:14px 20px; font-size:14px; border-bottom:1px solid var(--gray); }
+  .wf-table tr:last-child td { border-bottom:none; }
+  .wf-table tr:nth-child(even) { background:var(--gray-light); }
+  .wf-table tr:hover { background:rgba(0,209,255,0.04); }
+  .badge-ok { display:inline-block; background:#ECFDF5; color:#059669; padding:3px 10px; border-radius:10px; font-size:12px; font-weight:600; }
+
+  /* TEAM */
+  .team-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:20px; }
+  .team-card { text-align:center; padding:32px 16px; background:var(--white); border:1px solid var(--gray); border-radius:16px; transition:all 0.2s; }
+  .team-card:hover { border-color:var(--cyan-light); box-shadow:0 4px 16px rgba(8,12,67,0.05); }
+  .team-avatar { width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,var(--navy),var(--navy-mid)); display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:24px; font-weight:700; color:var(--cyan); }
+  .team-card h4 { font-size:15px; font-weight:600; color:var(--navy); margin-bottom:2px; }
+  .team-card .role { font-size:12px; color:var(--text-muted); margin-bottom:6px; }
+  .team-card .email { font-size:11px; color:var(--blue); }
+
+  /* CHECKLIST */
+  .check-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .check-item { display:flex; align-items:center; gap:12px; padding:16px 20px; background:var(--white); border:1px solid var(--gray); border-radius:10px; font-size:14px; font-weight:500; }
+  .check-icon { width:28px; height:28px; border-radius:50%; background:#ECFDF5; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:14px; }
+
+  /* ROADMAP */
+  .roadmap { display: flex; flex-direction: column; gap: 0; }
+  .roadmap-phase {
+    display: flex; align-items: stretch; gap: 24px; position: relative;
+  }
+  .roadmap-timeline {
+    display: flex; flex-direction: column; align-items: center; width: 60px; flex-shrink: 0;
+  }
+  .roadmap-dot {
+    width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; flex-shrink: 0; z-index: 1;
+  }
+  .roadmap-dot.done { background: #059669; color: white; }
+  .roadmap-dot.current { background: var(--cyan); color: var(--navy); box-shadow: 0 0 0 4px rgba(0,209,255,0.2); }
+  .roadmap-dot.future { background: var(--gray); color: var(--text-muted); }
+  .roadmap-line { width: 2px; flex: 1; min-height: 24px; }
+  .roadmap-line.done { background: #059669; }
+  .roadmap-line.current { background: linear-gradient(to bottom, var(--cyan), var(--gray)); }
+  .roadmap-line.future { background: var(--gray); }
+  .roadmap-card {
+    flex: 1; padding: 24px; border: 1px solid var(--gray); border-radius: 12px;
+    margin-bottom: 16px; transition: all 0.2s;
+  }
+  .roadmap-card.done { background: rgba(5,150,105,0.04); border-color: rgba(5,150,105,0.2); }
+  .roadmap-card.current { background: rgba(0,209,255,0.04); border-color: rgba(0,209,255,0.3); box-shadow: 0 4px 16px rgba(0,209,255,0.08); }
+  .roadmap-card.future { background: var(--white); }
+  .roadmap-card h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .roadmap-card .phase-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .roadmap-card .phase-label.done { color: #059669; }
+  .roadmap-card .phase-label.current { color: var(--cyan); }
+  .roadmap-card .phase-label.future { color: var(--text-muted); }
+  .roadmap-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .roadmap-card ul { list-style: none; padding: 0; margin: 8px 0 0; }
+  .roadmap-card ul li { font-size: 13px; color: var(--text-muted); padding: 3px 0; padding-left: 20px; position: relative; }
+  .roadmap-card ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 8px; height: 8px; border-radius: 50%; }
+  .roadmap-card.done ul li::before { background: #059669; }
+  .roadmap-card.current ul li::before { background: var(--cyan); }
+  .roadmap-card.future ul li::before { background: var(--gray); }
+
+  /* CHANNELS */
+  .channels { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); padding: 60px; text-align: center; }
+  .channels .section-title { color: var(--cyan); }
+  .channels .section-heading { color: var(--white); margin-bottom: 16px; }
+  .channels-subtitle { color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 40px; }
+  .channels-grid { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+  .channel-card {
+    display: flex; align-items: center; gap: 16px; padding: 20px 32px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; text-decoration: none; color: var(--white);
+    transition: all 0.25s; min-width: 260px;
+  }
+  .channel-card:hover { background: rgba(255,255,255,0.12); border-color: rgba(0,209,255,0.4); transform: translateY(-2px); }
+  .channel-icon {
+    width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .channel-icon.whatsapp { background: #25D366; }
+  .channel-icon.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .channel-icon svg { width: 28px; height: 28px; fill: white; }
+  .channel-info { text-align: left; }
+  .channel-info .channel-name { font-size: 16px; font-weight: 600; }
+  .channel-info .channel-handle { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  /* FOOTER */
+  .footer { background:var(--navy); color:rgba(255,255,255,0.5); padding:40px 60px; text-align:center; font-size:13px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .footer strong { color:var(--cyan); }
+  .footer a { color: var(--cyan); text-decoration: none; }
+  .footer-logo { height: 32px; margin-bottom: 16px; opacity: 0.6; }
+
+  @media (max-width:768px) {
+    .hero { padding:40px 24px; }
+    .hero h1 { font-size:32px; }
+    .hero-stats { gap:24px; }
+    .hero-stat .number { font-size:36px; }
+    .hero-top { flex-direction: column; gap: 16px; }
+    .hero-logos { gap: 12px; }
+    .hero-logo { height: 36px; }
+    .camarmo-logo { height: 40px; }
+    .channels { padding: 40px 24px; }
+    .channel-card { min-width: auto; flex: 1; }
+    section { padding:40px 24px; }
+    .section-heading { font-size:28px; }
+    .team-grid { grid-template-columns:repeat(2,1fr); }
+    .check-grid { grid-template-columns:1fr; }
+    .hero-footer { display:none; }
+    .funnel-item { flex-direction: column; }
+    .funnel-visual { width: 100%; }
+    .funnel-bar { width: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-top">
+      <div class="hero-logos">
+        <img src="https://framerusercontent.com/images/7Gv47xcO60eIP4POWObsZ3TiQ.png" alt="Triadeflow" class="hero-logo">
+        <span class="logo-divider"></span>
+        <img src="https://static.wixstatic.com/media/56726c_1a0378d4a34e43c8bb17faf43b4acb4a~mv2.png/v1/crop/x_0,y_716,w_3375,h_1944/fill/w_400,h_230,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/GRUPO%20CAMARMO%20FEED%20(3).png" alt="Grupo Camarmo" class="hero-logo camarmo-logo">
+      </div>
+      <div class="hero-links">
+        <a href="https://triadeflow.ai">triadeflow.ai</a>
+        <a href="https://hub.triadeflow.ai">hub.triadeflow.ai</a>
+      </div>
+    </div>
+    <div class="hero-badge">Apresentacao V1 &mdash; 26/02/2026</div>
+    <h1>CRM <span>Grupo Camarmo</span></h1>
+    <p class="subtitle">Implantacao completa do CRM com pipelines comerciais, automacoes e distribuicao de leads para a equipe.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="number">44</div><div class="label">Custom Fields</div></div>
+      <div class="hero-stat"><div class="number">26</div><div class="label">Tags</div></div>
+      <div class="hero-stat"><div class="number">5</div><div class="label">Pipelines</div></div>
+      <div class="hero-stat"><div class="number">8</div><div class="label">Workflows</div></div>
+      <div class="hero-stat"><div class="number">5</div><div class="label">Usuarios</div></div>
+    </div>
+  </div>
+  <div class="hero-footer">
+    <span>Triadeflow &mdash; TDI&trade; (Triadeflow Digital Implementation)</span>
+    <span><a href="https://hub.triadeflow.ai">hub.triadeflow.ai</a></span>
+  </div>
+</div>
+
+<!-- OVERVIEW CARDS -->
+<section>
+  <div class="section-title">Visao Geral</div>
+  <h2 class="section-heading">O que foi entregue</h2>
+  <div class="grid">
+    <div class="card"><div class="card-icon">&#x1F4CB;</div><div class="metric">44</div><h3>Custom Fields</h3><p>29 campos de contato + 15 campos de oportunidade. Texto, dropdown, data, monetario, telefone.</p></div>
+    <div class="card"><div class="card-icon">&#x1F3F7;</div><div class="metric">26</div><h3>Tags</h3><p>Produto (4), Canal (6), Status (7), Operacional (5), Especial (4). Nomenclatura padronizada.</p></div>
+    <div class="card"><div class="card-icon">&#x1F4CA;</div><div class="metric">5</div><h3>Pipelines</h3><p>4 comerciais por produto + 1 Nutricao/Reativacao. Etapas customizadas.</p></div>
+    <div class="card"><div class="card-icon">&#x26A1;</div><div class="metric">8</div><h3>Workflows</h3><p>Entrada de lead, SLA, follow-ups, transicoes won/lost, nutricao e requalificacao.</p></div>
+    <div class="card"><div class="card-icon">&#x1F465;</div><div class="metric">5</div><h3>Usuarios</h3><p>1 admin (Carlos) + 4 comerciais com emails @triadeflow.com.br.</p></div>
+    <div class="card"><div class="card-icon">&#x1F504;</div><div class="metric">1</div><h3>Round Robin</h3><p>Distribuicao automatica entre 4 comerciais. Seg-Sex 08-18h, slots 30min.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PIPELINES AS FUNNELS -->
+<section>
+  <div class="section-title">Estrutura Comercial</div>
+  <h2 class="section-heading">Pipelines &mdash; Funis de Vendas</h2>
+  <div class="funnel-wrapper">
+
+    <div class="funnel-item">
+      <div class="funnel-visual">
+        <div class="funnel-bar" style="width:120px"></div>
+        <div class="funnel-label">Recrutamento</div>
+      </div>
+      <div class="funnel-content">
+        <h3>Comercial | Recrutamento</h3>
+        <div class="funnel-stages">
+          <span class="stage">Lead Recebido</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Qualificacao</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Diagnostico</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Proposta Enviada</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Negociacao</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-item">
+      <div class="funnel-visual">
+        <div class="funnel-bar" style="width:110px"></div>
+        <div class="funnel-label">C-Partner</div>
+      </div>
+      <div class="funnel-content">
+        <h3>Comercial | C-Partner</h3>
+        <div class="funnel-stages">
+          <span class="stage">Lead Recebido</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Pre-qualificacao</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Videochamada</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Proposta</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Coleta de Dados</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Contrato</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Pagamento</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-item">
+      <div class="funnel-visual">
+        <div class="funnel-bar" style="width:100px"></div>
+        <div class="funnel-label">Comunidades</div>
+      </div>
+      <div class="funnel-content">
+        <h3>Comercial | Comunidades</h3>
+        <div class="funnel-stages">
+          <span class="stage">Lead Recebido</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Enquadramento</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Videochamada</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Material Enviado</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Follow-up</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Aguard. Pgto</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-item">
+      <div class="funnel-visual">
+        <div class="funnel-bar" style="width:90px"></div>
+        <div class="funnel-label">Link</div>
+      </div>
+      <div class="funnel-content">
+        <h3>Comercial | Link</h3>
+        <div class="funnel-stages">
+          <span class="stage">Lead Recebido</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Qualificacao</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Proposta Enviada</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Negociacao</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Aguard. Assinatura</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-item funnel-nutricao">
+      <div class="funnel-visual">
+        <div class="funnel-bar" style="width:80px"></div>
+        <div class="funnel-label">Nutricao</div>
+      </div>
+      <div class="funnel-content">
+        <h3 style="color:var(--blue)">Nutricao | Reativacao</h3>
+        <div class="funnel-stages">
+          <span class="stage">Classificacao</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Sequencia Ativa</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Engajou</span><span class="stage-arrow">&rarr;</span>
+          <span class="stage">Requalificado</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REVOPS FLOW -->
+<div class="section-full"><section><div class="inner">
+  <div class="section-title">Fluxo RevOps</div>
+  <h2 class="section-heading">Ciclo de vida do lead</h2>
+  <div style="background:var(--navy);border-radius:16px;padding:48px;color:var(--white);text-align:center">
+    <div style="display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:32px">
+      <div style="background:rgba(0,209,255,0.15);border:1px solid rgba(0,209,255,0.3);padding:14px 28px;border-radius:12px;font-weight:600;font-size:15px">
+        Lead chega<br><span style="font-size:11px;color:var(--cyan)">Customer Replied</span>
+      </div>
+      <span style="font-size:28px;color:var(--cyan)">&rarr;</span>
+      <div style="background:rgba(0,209,255,0.15);border:1px solid rgba(0,209,255,0.3);padding:14px 28px;border-radius:12px;font-weight:600;font-size:15px">
+        Round Robin<br><span style="font-size:11px;color:var(--cyan)">Distribuicao automatica</span>
+      </div>
+      <span style="font-size:28px;color:var(--cyan)">&rarr;</span>
+      <div style="background:rgba(17,109,255,0.2);border:1px solid rgba(17,109,255,0.4);padding:14px 28px;border-radius:12px;font-weight:600;font-size:15px">
+        Pipeline Comercial<br><span style="font-size:11px;color:var(--cyan-light)">4 funis por produto</span>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:60px;flex-wrap:wrap;margin-top:16px">
+      <div style="text-align:center"><div style="font-size:28px;margin-bottom:4px">&#x2705;</div><div style="font-weight:700;color:#4ADE80;font-size:16px">Won</div><div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px">Tag VENDA_GANHA<br>Cria opp Pos-Venda</div></div>
+      <div style="text-align:center"><div style="font-size:28px;margin-bottom:4px">&#x274C;</div><div style="font-weight:700;color:#F87171;font-size:16px">Lost / Abandoned</div><div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px">Tag NUTRICAO_ATIVA<br>Cria opp Nutricao</div></div>
+      <div style="text-align:center"><div style="font-size:28px;margin-bottom:4px">&#x1F504;</div><div style="font-weight:700;color:var(--cyan);font-size:16px">Requalificado</div><div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px">Tag REQUALIFICADO<br>Volta ao comercial</div></div>
+    </div>
+  </div>
+</div></section></div>
+
+<!-- WORKFLOWS -->
+<section>
+  <div class="section-title">Automacoes</div>
+  <h2 class="section-heading">8 Workflows publicados</h2>
+  <table class="wf-table">
+    <thead><tr><th>#</th><th>Workflow</th><th>Trigger</th><th>Acao Principal</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Entrada de Lead</strong></td><td>Customer Replied</td><td>Cria opp unica + tag op_aberta + Round Robin</td><td><span class="badge-ok">Publicado</span></td></tr>
+      <tr><td>1c</td><td><strong>Controle op_aberta</strong></td><td>Opp Status &rarr; Won/Lost/Abandoned</td><td>Remove tag op_aberta ao fechar</td><td><span class="badge-ok">Testado</span></td></tr>
+      <tr><td>2</td><td><strong>SLA Primeiro Contato 15min</strong></td><td>Stage &rarr; Lead Recebido</td><td>Aguarda 15min &rarr; verifica SLA cumprido/estourado</td><td><span class="badge-ok">Publicado</span></td></tr>
+      <tr><td>3</td><td><strong>Follow-up Proposta D+2</strong></td><td>Stage &rarr; Proposta Enviada</td><td>Tag + aguarda 2 dias uteis &rarr; tarefa follow-up</td><td><span class="badge-ok">Testado</span></td></tr>
+      <tr><td>4</td><td><strong>Follow-up Negociacao D+7</strong></td><td>Stage &rarr; Negociacao</td><td>Aguarda 7 dias &rarr; alerta negociacao parada</td><td><span class="badge-ok">Publicado</span></td></tr>
+      <tr><td>5</td><td><strong>Venda Ganha &rarr; Pos-Venda</strong></td><td>Opp Status &rarr; Won</td><td>Tag VENDA_GANHA + cria opp em Nutricao</td><td><span class="badge-ok">Testado</span></td></tr>
+      <tr><td>6</td><td><strong>Perdido/Abandonado &rarr; Nutricao</strong></td><td>Opp Status &rarr; Lost / Abandoned</td><td>Tag NUTRICAO_ATIVA + cria opp em Nutricao</td><td><span class="badge-ok">Testado</span></td></tr>
+      <tr><td>6c</td><td><strong>Requalificado &rarr; Comercial</strong></td><td>Stage &rarr; Requalificado</td><td>Retorna lead ao pipeline de origem</td><td><span class="badge-ok">Publicado</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="divider"></div>
+
+<!-- TEAM -->
+<section>
+  <div class="section-title">Equipe</div>
+  <h2 class="section-heading">Usuarios configurados</h2>
+  <div class="team-grid">
+    <div class="team-card"><div class="team-avatar">C</div><h4>Carlos Mororo</h4><div class="role">Admin</div><div class="email">conta original</div></div>
+    <div class="team-card"><div class="team-avatar">G</div><h4>Graziele Nobre</h4><div class="role">Gestao Comercial</div><div class="email">graziele@triadeflow.com.br</div></div>
+    <div class="team-card"><div class="team-avatar">P</div><h4>Priscila Araujo</h4><div class="role">Comercial</div><div class="email">priscila@triadeflow.com.br</div></div>
+    <div class="team-card"><div class="team-avatar">G</div><h4>Gleniany Frota</h4><div class="role">Comercial</div><div class="email">gleniany@triadeflow.com.br</div></div>
+    <div class="team-card"><div class="team-avatar">A</div><h4>Ana Alice</h4><div class="role">Operacional</div><div class="email">anaalice@triadeflow.com.br</div></div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<div class="section-full"><section><div class="inner">
+  <div class="section-title">Checklist V1</div>
+  <h2 class="section-heading">Tudo configurado e pronto</h2>
+  <div class="check-grid">
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 44 Custom Fields (contato + oportunidade)</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 26 Tags padronizadas</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 5 Pipelines com etapas customizadas</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 8 Workflows publicados</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 5 Usuarios criados e ativos</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Round Robin configurado (4 membros)</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Business Hours (Seg-Sex 08-18h)</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Timezone America/Sao_Paulo</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Acoes Create Opportunity (Won + Lost)</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Bug triggers AND corrigido</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 4 workflows testados e validados</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Marketing Pipeline removido</div>
+  </div>
+</div></section></div>
+
+<!-- ROADMAP -->
+<section>
+  <div class="section-title">Roadmap</div>
+  <h2 class="section-heading">Proximas fases do projeto</h2>
+
+  <div class="roadmap">
+
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline">
+        <div class="roadmap-dot done">&#x2713;</div>
+        <div class="roadmap-line done"></div>
+      </div>
+      <div class="roadmap-card done">
+        <div class="phase-label done">V1 &mdash; Concluido</div>
+        <h4>Infraestrutura CRM</h4>
+        <ul>
+          <li>44 campos + 26 tags + 5 pipelines</li>
+          <li>8 workflows automatizados</li>
+          <li>5 usuarios + Round Robin</li>
+          <li>Testes e validacao</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline">
+        <div class="roadmap-dot current">2</div>
+        <div class="roadmap-line current"></div>
+      </div>
+      <div class="roadmap-card current">
+        <div class="phase-label current">V2 &mdash; Proximo</div>
+        <h4>Pos-Venda &amp; Refinamento</h4>
+        <ul>
+          <li>Pipeline Pos-Venda (etapas de onboarding)</li>
+          <li>Acoes SLA automaticas (Cumprido/Estourado)</li>
+          <li>Testes com dados reais dos 4 workflows deferidos</li>
+          <li>Score de pre-qualificacao C-Partner</li>
+          <li>Treinamento da equipe no CRM</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline">
+        <div class="roadmap-dot future">3</div>
+        <div class="roadmap-line future"></div>
+      </div>
+      <div class="roadmap-card future">
+        <div class="phase-label future">V3 &mdash; Comunicacao</div>
+        <h4>WhatsApp &amp; Canais</h4>
+        <ul>
+          <li>Integracao WhatsApp Business</li>
+          <li>Unificacao de WhatsApps da equipe</li>
+          <li>Templates de mensagens por pipeline</li>
+          <li>Automacao de follow-up via WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline">
+        <div class="roadmap-dot future">4</div>
+        <div class="roadmap-line future"></div>
+      </div>
+      <div class="roadmap-card future">
+        <div class="phase-label future">V4 &mdash; Inteligencia</div>
+        <h4>BI &amp; Dashboards</h4>
+        <ul>
+          <li>Dashboard de metricas comerciais</li>
+          <li>Relatorios por pipeline/produto/consultor</li>
+          <li>Alertas inteligentes de performance</li>
+          <li>Previsao de receita (forecast)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline">
+        <div class="roadmap-dot future">5</div>
+        <div class="roadmap-line future" style="min-height:0;height:0"></div>
+      </div>
+      <div class="roadmap-card future">
+        <div class="phase-label future">V5 &mdash; AI</div>
+        <h4>Automacao Inteligente</h4>
+        <ul>
+          <li>Bot de qualificacao automatica (Conversation AI)</li>
+          <li>Lead scoring com IA</li>
+          <li>Sugestoes automaticas de proxima acao</li>
+          <li>Integracao com plataformas de trafego</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHANNELS -->
+<div class="channels">
+  <div class="section-title">Fale Conosco</div>
+  <h2 class="section-heading" style="color:var(--white)">Canais de Comunicacao</h2>
+  <p class="channels-subtitle">Entre em contato com a Triadeflow para duvidas, suporte ou proximas fases do projeto.</p>
+  <div class="channels-grid">
+    <a href="https://wa.me/5519983805908?text=Ol%C3%A1%21+Vim+pela+apresenta%C3%A7%C3%A3o+do+CRM+Grupo+Camarmo.+Gostaria+de+mais+informa%C3%A7%C3%B5es." target="_blank" class="channel-card">
+      <div class="channel-icon whatsapp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </div>
+      <div class="channel-info">
+        <div class="channel-name">WhatsApp</div>
+        <div class="channel-handle">(19) 98380-5908</div>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/triadeflow/" target="_blank" class="channel-card">
+      <div class="channel-icon instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+      <div class="channel-info">
+        <div class="channel-name">Instagram</div>
+        <div class="channel-handle">@triadeflow</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <img src="https://framerusercontent.com/images/7Gv47xcO60eIP4POWObsZ3TiQ.png" alt="Triadeflow" class="footer-logo">
+  <p>Implementado por <strong><a href="https://triadeflow.ai">Triadeflow</a></strong> &mdash; Metodologia TDI&trade; (Triadeflow Digital Implementation)</p>
+  <p style="margin-top: 8px;"><a href="https://hub.triadeflow.ai" style="color:rgba(255,255,255,0.6)">hub.triadeflow.ai</a> &mdash; CRM V1 &mdash; Fevereiro 2026</p>
+</div>
+
+</body>
+        </html>
