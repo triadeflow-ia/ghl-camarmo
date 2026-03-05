@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal CRM — Grupo Camarmo | Triadeflow</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --navy: #080C43;
+    --navy-mid: #103363;
+    --navy-light: #051838;
+    --blue: #116DFF;
+    --cyan: #00D1FF;
+    --cyan-light: #94D9F6;
+    --white: #FFFFFF;
+    --gray-light: #F2F2F2;
+    --gray: #E8E8E8;
+    --text-dark: #242323;
+    --text-muted: #6B7280;
+    --green: #059669;
+    --red: #DC2626;
+    --yellow: #F59E0B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-dark); background: var(--white); line-height: 1.6; }
+
+  /* NAV */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(8,12,67,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 40px; height: 56px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { height: 28px; opacity: 0.9; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; font-weight: 500;
+    padding: 8px 14px; border-radius: 8px; transition: all 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--cyan); background: rgba(0,209,255,0.08); }
+  .nav-support {
+    background: var(--cyan); color: var(--navy); font-size: 13px; font-weight: 700;
+    padding: 8px 20px; border-radius: 8px; text-decoration: none; transition: all 0.2s;
+  }
+  .nav-support:hover { background: var(--white); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy-light) 100%);
+    color: var(--white); padding: 120px 60px 80px; min-height: 80vh;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before { content:''; position:absolute; top:-50%; right:-20%; width:600px; height:600px; background:radial-gradient(circle,rgba(0,209,255,0.08) 0%,transparent 70%); border-radius:50%; }
+  .hero-content { position:relative; z-index:1; max-width:1200px; margin:0 auto; width:100%; }
+  .hero-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:48px; }
+  .hero-logos { display:flex; align-items:center; gap:16px; }
+  .hero-logo { height: 48px; }
+  .camarmo-logo { height: 52px; filter: brightness(0) invert(1); }
+  .logo-divider { width:1px; height:36px; background:rgba(255,255,255,0.2); }
+  .hero-badge { display:inline-block; background:rgba(0,209,255,0.15); border:1px solid rgba(0,209,255,0.3); color:var(--cyan); padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; letter-spacing:1px; text-transform:uppercase; margin-bottom:24px; }
+  .hero h1 { font-size:48px; font-weight:800; line-height:1.1; margin-bottom:16px; }
+  .hero h1 span { color: var(--cyan); }
+  .hero p.subtitle { font-size:18px; font-weight:300; color:rgba(255,255,255,0.7); max-width:600px; margin-bottom:40px; }
+  .hero-stats { display:flex; gap:48px; flex-wrap:wrap; }
+  .hero-stat .number { font-size:42px; font-weight:800; color:var(--cyan); line-height:1; }
+  .hero-stat .label { font-size:13px; color:rgba(255,255,255,0.6); margin-top:4px; }
+
+  /* SECTIONS */
+  section { padding:80px 60px; max-width:1200px; margin:0 auto; }
+  .section-full { max-width:none; background:var(--gray-light); }
+  .section-full .inner { max-width:1200px; margin:0 auto; }
+  .section-dark { max-width:none; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); }
+  .section-dark .inner { max-width:1200px; margin:0 auto; }
+  .section-title { font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin-bottom:8px; }
+  .section-heading { font-size:32px; font-weight:700; color:var(--navy); margin-bottom:40px; line-height:1.2; }
+  .divider { height:1px; background:var(--gray); max-width:1200px; margin:0 auto; }
+
+  /* GRID CARDS */
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
+  .card { background:var(--white); border:1px solid var(--gray); border-radius:16px; padding:32px; transition:all 0.2s; }
+  .card:hover { border-color:var(--cyan-light); box-shadow:0 8px 24px rgba(8,12,67,0.06); transform:translateY(-2px); }
+  .card-icon { width:48px; height:48px; background:linear-gradient(135deg,var(--navy),var(--navy-mid)); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:16px; }
+  .card h3 { font-size:18px; font-weight:600; color:var(--navy); margin-bottom:8px; }
+  .card p { font-size:14px; color:var(--text-muted); line-height:1.5; }
+  .card .metric { font-size:32px; font-weight:800; color:var(--navy); margin-bottom:4px; }
+
+  /* FUNNEL */
+  .funnel-wrapper { display: flex; flex-direction: column; gap: 32px; }
+  .funnel-item { display: flex; align-items: flex-start; gap: 24px; }
+  .funnel-visual { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 120px; }
+  .funnel-bar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--navy), var(--blue)); }
+  .funnel-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; text-align: center; }
+  .funnel-content { flex: 1; }
+  .funnel-content h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .funnel-stages { display: flex; gap: 6px; flex-wrap: wrap; }
+  .stage { background:var(--gray-light); color:var(--text-dark); padding:5px 14px; border-radius:8px; font-size:12px; font-weight:500; white-space:nowrap; border: 1px solid var(--gray); }
+  .stage-arrow { color:var(--cyan); font-weight:700; font-size:16px; display:flex; align-items:center; }
+  .funnel-nutricao .funnel-bar { background: linear-gradient(90deg, var(--cyan), var(--blue)); }
+  .funnel-nutricao .stage { background: rgba(0,209,255,0.08); border-color: rgba(0,209,255,0.2); color: var(--navy); }
+
+  /* WORKFLOW TABLE */
+  .wf-table { width:100%; border-collapse:separate; border-spacing:0; border-radius:12px; overflow:hidden; border:1px solid var(--gray); }
+  .wf-table th { background:var(--navy); color:var(--white); padding:14px 20px; text-align:left; font-size:13px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; }
+  .wf-table td { padding:14px 20px; font-size:14px; border-bottom:1px solid var(--gray); }
+  .wf-table tr:last-child td { border-bottom:none; }
+  .wf-table tr:nth-child(even) { background:var(--gray-light); }
+  .wf-table tr:hover { background:rgba(0,209,255,0.04); }
+  .badge-ok { display:inline-block; background:#ECFDF5; color:#059669; padding:3px 10px; border-radius:10px; font-size:12px; font-weight:600; }
+
+  /* TEAM */
+  .team-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:20px; }
+  .team-card { text-align:center; padding:32px 16px; background:var(--white); border:1px solid var(--gray); border-radius:16px; transition:all 0.2s; }
+  .team-card:hover { border-color:var(--cyan-light); box-shadow:0 4px 16px rgba(8,12,67,0.05); }
+  .team-avatar { width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,var(--navy),var(--navy-mid)); display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:24px; font-weight:700; color:var(--cyan); }
+  .team-card h4 { font-size:15px; font-weight:600; color:var(--navy); margin-bottom:2px; }
+  .team-card .role { font-size:12px; color:var(--text-muted); margin-bottom:6px; }
+  .team-card .email { font-size:11px; color:var(--blue); }
+
+  /* CHECKLIST */
+  .check-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .check-item { display:flex; align-items:center; gap:12px; padding:16px 20px; background:var(--white); border:1px solid var(--gray); border-radius:10px; font-size:14px; font-weight:500; }
+  .check-icon { width:28px; height:28px; border-radius:50%; background:#ECFDF5; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:14px; }
+
+  /* ROADMAP */
+  .roadmap { display: flex; flex-direction: column; gap: 0; }
+  .roadmap-phase { display: flex; align-items: stretch; gap: 24px; position: relative; }
+  .roadmap-timeline { display: flex; flex-direction: column; align-items: center; width: 60px; flex-shrink: 0; }
+  .roadmap-dot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0; z-index: 1; }
+  .roadmap-dot.done { background: #059669; color: white; }
+  .roadmap-dot.current { background: var(--cyan); color: var(--navy); box-shadow: 0 0 0 4px rgba(0,209,255,0.2); }
+  .roadmap-dot.future { background: var(--gray); color: var(--text-muted); }
+  .roadmap-line { width: 2px; flex: 1; min-height: 24px; }
+  .roadmap-line.done { background: #059669; }
+  .roadmap-line.current { background: linear-gradient(to bottom, var(--cyan), var(--gray)); }
+  .roadmap-line.future { background: var(--gray); }
+  .roadmap-card { flex: 1; padding: 24px; border: 1px solid var(--gray); border-radius: 12px; margin-bottom: 16px; }
+  .roadmap-card.done { background: rgba(5,150,105,0.04); border-color: rgba(5,150,105,0.2); }
+  .roadmap-card.current { background: rgba(0,209,255,0.04); border-color: rgba(0,209,255,0.3); box-shadow: 0 4px 16px rgba(0,209,255,0.08); }
+  .roadmap-card.future { background: var(--white); }
+  .roadmap-card h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .roadmap-card .phase-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .roadmap-card .phase-label.done { color: #059669; }
+  .roadmap-card .phase-label.current { color: var(--cyan); }
+  .roadmap-card .phase-label.future { color: var(--text-muted); }
+  .roadmap-card ul { list-style: none; padding: 0; margin: 8px 0 0; }
+  .roadmap-card ul li { font-size: 13px; color: var(--text-muted); padding: 3px 0 3px 20px; position: relative; }
+  .roadmap-card ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 8px; height: 8px; border-radius: 50%; }
+  .roadmap-card.done ul li::before { background: #059669; }
+  .roadmap-card.current ul li::before { background: var(--cyan); }
+  .roadmap-card.future ul li::before { background: var(--gray); }
+
+  /* ACCORDION - DOCS */
+  .accordion { display: flex; flex-direction: column; gap: 12px; }
+  .accordion-item { border: 1px solid var(--gray); border-radius: 12px; overflow: hidden; background: var(--white); }
+  .accordion-header {
+    padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    font-size: 16px; font-weight: 600; color: var(--navy); transition: background 0.2s;
+  }
+  .accordion-header:hover { background: var(--gray-light); }
+  .accordion-header .arrow { font-size: 20px; color: var(--cyan); transition: transform 0.3s; }
+  .accordion-item.open .accordion-header .arrow { transform: rotate(180deg); }
+  .accordion-body { padding: 0 24px 24px; display: none; }
+  .accordion-item.open .accordion-body { display: block; }
+  .accordion-body p { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.7; }
+  .accordion-body .flow-steps { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 16px 0; }
+  .accordion-body .flow-step {
+    background: var(--gray-light); border: 1px solid var(--gray); padding: 8px 16px;
+    border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--navy);
+  }
+  .accordion-body .flow-arrow { color: var(--cyan); font-weight: 700; font-size: 18px; }
+  .accordion-body .info-box {
+    background: rgba(17,109,255,0.06); border: 1px solid rgba(17,109,255,0.15);
+    border-radius: 10px; padding: 16px 20px; font-size: 13px; color: var(--navy); margin-top: 12px;
+  }
+  .accordion-body .warn-box {
+    background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 10px; padding: 16px 20px; font-size: 13px; color: #92400E; margin-top: 12px;
+  }
+  .wf-badge { display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; margin-right: 8px; }
+  .wf-badge.trigger { background: rgba(0,209,255,0.12); color: #0891B2; }
+  .wf-badge.action { background: rgba(5,150,105,0.12); color: #059669; }
+
+  /* REFERENCE TABLES */
+  .ref-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--gray); margin-bottom: 24px; }
+  .ref-table th { background: var(--gray-light); color: var(--navy); padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; border-bottom: 1px solid var(--gray); }
+  .ref-table td { padding: 10px 16px; font-size: 13px; border-bottom: 1px solid rgba(0,0,0,0.04); }
+  .ref-table tr:last-child td { border-bottom: none; }
+  .ref-table tr:hover { background: rgba(0,209,255,0.03); }
+  .tag-pill { display: inline-block; padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+  .tag-pill.produto { background: #EDE9FE; color: #6D28D9; }
+  .tag-pill.canal { background: #DBEAFE; color: #1D4ED8; }
+  .tag-pill.status { background: #FEF3C7; color: #92400E; }
+  .tag-pill.operacional { background: #ECFDF5; color: #059669; }
+  .tag-pill.especial { background: #FEE2E2; color: #DC2626; }
+
+  /* SUPPORT FORM */
+  .support-section { padding: 80px 60px; }
+  .support-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+  .support-info h2 { font-size: 32px; font-weight: 700; color: var(--white); margin-bottom: 16px; line-height: 1.2; }
+  .support-info p { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 32px; line-height: 1.7; }
+  .support-categories { display: flex; flex-direction: column; gap: 12px; }
+  .support-cat {
+    display: flex; align-items: center; gap: 16px; padding: 16px 20px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+  }
+  .support-cat-icon { font-size: 24px; width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .support-cat-icon.bug { background: rgba(220,38,38,0.2); }
+  .support-cat-icon.duvida { background: rgba(17,109,255,0.2); }
+  .support-cat-icon.ajuste { background: rgba(245,158,11,0.2); }
+  .support-cat-icon.sugestao { background: rgba(5,150,105,0.2); }
+  .support-cat-text h4 { font-size: 14px; font-weight: 600; color: var(--white); }
+  .support-cat-text p { font-size: 12px; color: rgba(255,255,255,0.5); margin: 0; }
+
+  .support-form {
+    background: var(--white); border-radius: 20px; padding: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .support-form h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 24px; }
+  .form-row { margin-bottom: 20px; }
+  .form-row label { display: block; font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%; padding: 12px 16px; border: 1px solid var(--gray); border-radius: 10px;
+    font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-dark);
+    transition: border-color 0.2s; background: var(--white);
+  }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,209,255,0.1);
+  }
+  .form-row textarea { resize: vertical; min-height: 120px; }
+  .form-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-submit {
+    width: 100%; padding: 14px; background: var(--navy); color: var(--white);
+    border: none; border-radius: 10px; font-family: 'Inter', sans-serif;
+    font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+  }
+  .form-submit:hover { background: var(--blue); }
+  .form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .form-success {
+    display: none; text-align: center; padding: 40px 20px;
+  }
+  .form-success .check-big { font-size: 48px; margin-bottom: 16px; }
+  .form-success h3 { font-size: 20px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+  .form-success p { font-size: 14px; color: var(--text-muted); }
+
+  /* CHANNELS */
+  .channels { background: var(--gray-light); padding: 60px; text-align: center; }
+  .channels-grid { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 32px; }
+  .channel-card {
+    display: flex; align-items: center; gap: 16px; padding: 20px 32px;
+    background: var(--white); border: 1px solid var(--gray);
+    border-radius: 14px; text-decoration: none; color: var(--text-dark);
+    transition: all 0.25s; min-width: 260px;
+  }
+  .channel-card:hover { border-color: var(--cyan-light); box-shadow: 0 4px 16px rgba(0,0,0,0.06); transform: translateY(-2px); }
+  .channel-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .channel-icon.whatsapp { background: #25D366; }
+  .channel-icon.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .channel-icon svg { width: 28px; height: 28px; fill: white; }
+  .channel-info { text-align: left; }
+  .channel-info .channel-name { font-size: 16px; font-weight: 600; color: var(--navy); }
+  .channel-info .channel-handle { font-size: 13px; color: var(--text-muted); }
+
+  /* FOOTER */
+  .footer { background:var(--navy); color:rgba(255,255,255,0.5); padding:40px 60px; text-align:center; font-size:13px; }
+  .footer strong { color:var(--cyan); }
+  .footer a { color: var(--cyan); text-decoration: none; }
+  .footer-logo { height: 32px; margin-bottom: 16px; opacity: 0.6; }
+
+  /* TAB SYSTEM */
+  .tabs { display: flex; gap: 4px; margin-bottom: 32px; background: var(--gray-light); border-radius: 10px; padding: 4px; width: fit-content; }
+  .tab-btn {
+    padding: 10px 20px; border: none; background: none; border-radius: 8px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+  }
+  .tab-btn.active { background: var(--white); color: var(--navy); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  @media (max-width:768px) {
+    .nav { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hero { padding:80px 24px 60px; }
+    .hero h1 { font-size:32px; }
+    .hero-stats { gap:24px; }
+    .hero-stat .number { font-size:32px; }
+    .hero-top { flex-direction: column; gap: 16px; }
+    section { padding:40px 24px; }
+    .section-heading { font-size:24px; }
+    .team-grid { grid-template-columns:repeat(2,1fr); }
+    .check-grid { grid-template-columns:1fr; }
+    .funnel-item { flex-direction: column; }
+    .funnel-visual { width: 100%; }
+    .funnel-bar { width: 100% !important; }
+    .support-inner { grid-template-columns: 1fr; }
+    .support-section { padding: 60px 24px; }
+    .form-row-grid { grid-template-columns: 1fr; }
+    .channels { padding: 40px 24px; }
+    .channel-card { min-width: auto; flex: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <img src="https://framerusercontent.com/images/7Gv47xcO60eIP4POWObsZ3TiQ.png" alt="Triadeflow" class="nav-logo">
+  <div class="nav-links">
+    <a href="#visao-geral">Visao Geral</a>
+    <a href="#pipelines">Pipelines</a>
+    <a href="#workflows">Workflows</a>
+    <a href="#documentacao">Documentacao</a>
+    <a href="#referencia">Referencia</a>
+    <a href="#equipe">Equipe</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+  <a href="#suporte" class="nav-support">Abrir Chamado</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="hero-top">
+      <div class="hero-logos">
+        <img src="https://framerusercontent.com/images/7Gv47xcO60eIP4POWObsZ3TiQ.png" alt="Triadeflow" class="hero-logo">
+        <span class="logo-divider"></span>
+        <img src="https://static.wixstatic.com/media/56726c_1a0378d4a34e43c8bb17faf43b4acb4a~mv2.png/v1/crop/x_0,y_716,w_3375,h_1944/fill/w_400,h_230,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/GRUPO%20CAMARMO%20FEED%20(3).png" alt="Grupo Camarmo" class="hero-logo camarmo-logo">
+      </div>
+    </div>
+    <div class="hero-badge">Portal do Cliente &mdash; CRM V1</div>
+    <h1>Portal CRM<br><span>Grupo Camarmo</span></h1>
+    <p class="subtitle">Documentacao completa, referencia tecnica e central de suporte do seu CRM GoHighLevel.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="number">44</div><div class="label">Custom Fields</div></div>
+      <div class="hero-stat"><div class="number">26</div><div class="label">Tags</div></div>
+      <div class="hero-stat"><div class="number">5</div><div class="label">Pipelines</div></div>
+      <div class="hero-stat"><div class="number">8</div><div class="label">Workflows</div></div>
+      <div class="hero-stat"><div class="number">5</div><div class="label">Usuarios</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW CARDS -->
+<section id="visao-geral">
+  <div class="section-title">Visao Geral</div>
+  <h2 class="section-heading">O que foi entregue</h2>
+  <div class="grid">
+    <div class="card"><div class="card-icon">&#x1F4CB;</div><div class="metric">44</div><h3>Custom Fields</h3><p>29 campos de contato + 15 campos de oportunidade. Texto, dropdown, data, monetario, telefone.</p></div>
+    <div class="card"><div class="card-icon">&#x1F3F7;</div><div class="metric">26</div><h3>Tags</h3><p>Produto (4), Canal (6), Status (7), Operacional (5), Especial (4). Nomenclatura padronizada.</p></div>
+    <div class="card"><div class="card-icon">&#x1F4CA;</div><div class="metric">5</div><h3>Pipelines</h3><p>4 comerciais por produto + 1 Nutricao/Reativacao. Etapas customizadas por servico.</p></div>
+    <div class="card"><div class="card-icon">&#x26A1;</div><div class="metric">8</div><h3>Workflows</h3><p>Entrada de lead, SLA, follow-ups, transicoes won/lost, nutricao e requalificacao.</p></div>
+    <div class="card"><div class="card-icon">&#x1F465;</div><div class="metric">5</div><h3>Usuarios</h3><p>1 admin (Carlos) + 4 comerciais com emails @triadeflow.com.br.</p></div>
+    <div class="card"><div class="card-icon">&#x1F504;</div><div class="metric">1</div><h3>Round Robin</h3><p>Distribuicao automatica entre 4 comerciais. Seg-Sex 08-18h, slots 30min.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PIPELINES -->
+<section id="pipelines">
+  <div class="section-title">Estrutura Comercial</div>
+  <h2 class="section-heading">Pipelines &mdash; Funis de Vendas</h2>
+  <div class="funnel-wrapper">
+    <div class="funnel-item">
+      <div class="funnel-visual"><div class="funnel-bar" style="width:120px"></div><div class="funnel-label">Recrutamento</div></div>
+      <div class="funnel-content"><h3>Comercial | Recrutamento</h3><div class="funnel-stages"><span class="stage">Lead Recebido</span><span class="stage-arrow">&rarr;</span><span class="stage">Qualificacao</span><span class="stage-arrow">&rarr;</span><span class="stage">Diagnostico</span><span class="stage-arrow">&rarr;</span><span class="stage">Proposta Enviada</span><span class="stage-arrow">&rarr;</span><span class="stage">Negociacao</span></div></div>
+    </div>
+    <div class="funnel-item">
+      <div class="funnel-visual"><div class="funnel-bar" style="width:110px"></div><div class="funnel-label">C-Partner</div></div>
+      <div class="funnel-content"><h3>Comercial | C-Partner</h3><div class="funnel-stages"><span class="stage">Lead Recebido</span><span class="stage-arrow">&rarr;</span><span class="stage">Pre-qualificacao</span><span class="stage-arrow">&rarr;</span><span class="stage">Videochamada</span><span class="stage-arrow">&rarr;</span><span class="stage">Proposta</span><span class="stage-arrow">&rarr;</span><span class="stage">Coleta de Dados</span><span class="stage-arrow">&rarr;</span><span class="stage">Contrato</span><span class="stage-arrow">&rarr;</span><span class="stage">Pagamento</span></div></div>
+    </div>
+    <div class="funnel-item">
+      <div class="funnel-visual"><div class="funnel-bar" style="width:100px"></div><div class="funnel-label">Comunidades</div></div>
+      <div class="funnel-content"><h3>Comercial | Comunidades</h3><div class="funnel-stages"><span class="stage">Lead Recebido</span><span class="stage-arrow">&rarr;</span><span class="stage">Enquadramento</span><span class="stage-arrow">&rarr;</span><span class="stage">Videochamada</span><span class="stage-arrow">&rarr;</span><span class="stage">Material Enviado</span><span class="stage-arrow">&rarr;</span><span class="stage">Follow-up</span><span class="stage-arrow">&rarr;</span><span class="stage">Aguard. Pgto</span></div></div>
+    </div>
+    <div class="funnel-item">
+      <div class="funnel-visual"><div class="funnel-bar" style="width:90px"></div><div class="funnel-label">Link</div></div>
+      <div class="funnel-content"><h3>Comercial | Link</h3><div class="funnel-stages"><span class="stage">Lead Recebido</span><span class="stage-arrow">&rarr;</span><span class="stage">Qualificacao</span><span class="stage-arrow">&rarr;</span><span class="stage">Proposta Enviada</span><span class="stage-arrow">&rarr;</span><span class="stage">Negociacao</span><span class="stage-arrow">&rarr;</span><span class="stage">Aguard. Assinatura</span></div></div>
+    </div>
+    <div class="funnel-item funnel-nutricao">
+      <div class="funnel-visual"><div class="funnel-bar" style="width:80px"></div><div class="funnel-label">Nutricao</div></div>
+      <div class="funnel-content"><h3 style="color:var(--blue)">Nutricao | Reativacao</h3><div class="funnel-stages"><span class="stage">Classificacao</span><span class="stage-arrow">&rarr;</span><span class="stage">Sequencia Ativa</span><span class="stage-arrow">&rarr;</span><span class="stage">Engajou</span><span class="stage-arrow">&rarr;</span><span class="stage">Requalificado</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVOPS FLOW -->
+<div class="section-full"><section><div class="inner">
+  <div class="section-title">Fluxo RevOps</div>
+  <h2 class="section-heading">Ciclo de vida do lead</h2>
+  <div style="background:var(--navy);border-radius:16px;padding:48px;color:var(--white);text-align:center">
+    <div style="display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:32px">
+      <div style="background:rgba(0,209,255,0.15);border:1px solid rgba(0,209,255,0.3);padding:14px 28px;border-radius:12px;font-weight:600;font-size:15px">Lead chega<br><span style="font-size:11px;color:var(--cyan)">Customer Replied</span></div>
+      <span style="font-size:28px;color:var(--cyan)">&rarr;</span>
+      <div style="background:rgba(0,209,255,0.15);border:1px solid rgba(0,209,255,0.3);padding:14px 28px;border-radius:12px;font-weight:600;font-size:15px">Round Robin<br><span style="font-size:11px;color:var(--cyan)">Distribuicao automatica</span></div>
+      <span style="font-size:28px;color:var(--cyan)">&rarr;</span>
+      <div style="background:rgba(17,109,255,0.2);border:1px solid rgba(17,109,255,0.4);padding:14px 28px;border-radius:12px;font-weight:600;font-size:15px">Pipeline Comercial<br><span style="font-size:11px;color:var(--cyan-light)">4 funis por produto</span></div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:60px;flex-wrap:wrap;margin-top:16px">
+      <div style="text-align:center"><div style="font-size:28px;margin-bottom:4px">&#x2705;</div><div style="font-weight:700;color:#4ADE80;font-size:16px">Won</div><div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px">Tag VENDA_GANHA<br>Cria opp Pos-Venda</div></div>
+      <div style="text-align:center"><div style="font-size:28px;margin-bottom:4px">&#x274C;</div><div style="font-weight:700;color:#F87171;font-size:16px">Lost / Abandoned</div><div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px">Tag NUTRICAO_ATIVA<br>Cria opp Nutricao</div></div>
+      <div style="text-align:center"><div style="font-size:28px;margin-bottom:4px">&#x1F504;</div><div style="font-weight:700;color:var(--cyan);font-size:16px">Requalificado</div><div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px">Tag REQUALIFICADO<br>Volta ao comercial</div></div>
+    </div>
+  </div>
+</div></section></div>
+
+<!-- WORKFLOWS TABLE -->
+<section id="workflows">
+  <div class="section-title">Automacoes</div>
+  <h2 class="section-heading">8 Workflows publicados</h2>
+  <table class="wf-table">
+    <thead><tr><th>#</th><th>Workflow</th><th>Trigger</th><th>Acao Principal</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Entrada de Lead</strong></td><td>Customer Replied</td><td>Cria opp unica + tag op_aberta + Round Robin</td><td><span class="badge-ok">Publicado</span></td></tr>
+      <tr><td>1c</td><td><strong>Controle op_aberta</strong></td><td>Opp Status &rarr; Won/Lost/Abandoned</td><td>Remove tag op_aberta ao fechar</td><td><span class="badge-ok">Testado</span></td></tr>
+      <tr><td>2</td><td><strong>SLA Primeiro Contato 15min</strong></td><td>Stage &rarr; Lead Recebido</td><td>Aguarda 15min &rarr; verifica SLA cumprido/estourado</td><td><span class="badge-ok">Publicado</span></td></tr>
+      <tr><td>3</td><td><strong>Follow-up Proposta D+2</strong></td><td>Stage &rarr; Proposta Enviada</td><td>Tag + aguarda 2 dias uteis &rarr; tarefa follow-up</td><td><span class="badge-ok">Testado</span></td></tr>
+      <tr><td>4</td><td><strong>Follow-up Negociacao D+7</strong></td><td>Stage &rarr; Negociacao</td><td>Aguarda 7 dias &rarr; alerta negociacao parada</td><td><span class="badge-ok">Publicado</span></td></tr>
+      <tr><td>5</td><td><strong>Venda Ganha &rarr; Pos-Venda</strong></td><td>Opp Status &rarr; Won</td><td>Tag VENDA_GANHA + cria opp em Nutricao</td><td><span class="badge-ok">Testado</span></td></tr>
+      <tr><td>6</td><td><strong>Perdido/Abandonado &rarr; Nutricao</strong></td><td>Opp Status &rarr; Lost / Abandoned</td><td>Tag NUTRICAO_ATIVA + cria opp em Nutricao</td><td><span class="badge-ok">Testado</span></td></tr>
+      <tr><td>6c</td><td><strong>Requalificado &rarr; Comercial</strong></td><td>Stage &rarr; Requalificado</td><td>Retorna lead ao pipeline de origem</td><td><span class="badge-ok">Publicado</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="divider"></div>
+
+<!-- DOCUMENTATION -->
+<section id="documentacao">
+  <div class="section-title">Documentacao</div>
+  <h2 class="section-heading">Como cada workflow funciona</h2>
+  <p style="font-size:15px;color:var(--text-muted);margin-bottom:32px;max-width:700px">Clique em cada workflow para ver a explicacao completa do que ele faz, quando dispara e o que acontece em cada etapa.</p>
+
+  <div class="accordion">
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><span class="wf-badge trigger">Trigger: Customer Replied</span> 1. Entrada de Lead &mdash; Controle op_aberta</span>
+        <span class="arrow">&#x25BC;</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Objetivo:</strong> Garantir que cada contato que interage gere exatamente uma oportunidade aberta, sem duplicatas.</p>
+        <div class="flow-steps">
+          <span class="flow-step">Cliente responde</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Verifica tag op_aberta</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Se NAO tem: cria opp</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Adiciona op_aberta</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Round Robin</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Cria tarefa</span>
+        </div>
+        <p>Se o contato <strong>ja tem</strong> a tag <code>op_aberta</code>, o workflow encerra sem criar nova oportunidade. Isso evita duplicatas.</p>
+        <div class="info-box"><strong>Importante:</strong> O trigger e "Customer Replied" (resposta do cliente em qualquer canal). NAO dispara ao criar oportunidade manualmente.</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><span class="wf-badge trigger">Trigger: Opp Status Changed</span> 1c. Controle op_aberta &mdash; Remover ao Fechar</span>
+        <span class="arrow">&#x25BC;</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Objetivo:</strong> Remover a tag <code>op_aberta</code> quando a oportunidade for fechada (Won, Lost ou Abandoned), liberando o contato para gerar nova oportunidade no futuro.</p>
+        <div class="flow-steps">
+          <span class="flow-step">Opp muda para Won/Lost/Abandoned</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Remove tag op_aberta</span>
+        </div>
+        <div class="warn-box"><strong>Atencao:</strong> Sem este workflow, um contato que perdeu ou ganhou uma oportunidade nunca mais gerara uma nova automaticamente.</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><span class="wf-badge trigger">Trigger: Stage Changed</span> 2. SLA Primeiro Contato &mdash; 15 minutos</span>
+        <span class="arrow">&#x25BC;</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Objetivo:</strong> Monitorar se o lead recebido foi contatado dentro de 15 minutos (horario comercial).</p>
+        <div class="flow-steps">
+          <span class="flow-step">Opp entra em Lead Recebido</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Aguarda 15 min (business hours)</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Verifica se ainda esta em Lead Recebido</span>
+        </div>
+        <p><strong>Se SLA estourado:</strong> Atualiza campo SLA para "Estourado", cria tarefa urgente e notifica o gestor.</p>
+        <p><strong>Se SLA cumprido:</strong> Atualiza campo SLA para "Cumprido". O vendedor ja avancou o lead.</p>
+        <div class="info-box"><strong>Horario comercial:</strong> O timer de 15 minutos so conta durante Seg-Sex 08:00-18:00. Se o lead entrar as 17h55, o timer pausa e continua no proximo dia util.</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><span class="wf-badge trigger">Trigger: Stage Changed</span> 3. Follow-up Proposta Enviada &mdash; D+2</span>
+        <span class="arrow">&#x25BC;</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Objetivo:</strong> Lembrar o vendedor de fazer follow-up 2 dias uteis apos mover uma oportunidade para "Proposta Enviada".</p>
+        <div class="flow-steps">
+          <span class="flow-step">Opp vai para Proposta Enviada</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Adiciona tag PROPOSTA_ENVIADA</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Aguarda 2 dias uteis</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Verifica se ainda esta la</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Cria tarefa de follow-up</span>
+        </div>
+        <p>Se a oportunidade <strong>ja saiu</strong> de Proposta Enviada (avancou ou foi perdida), o workflow encerra sem criar tarefa.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><span class="wf-badge trigger">Trigger: Stage Changed</span> 4. Follow-up Negociacao Parada &mdash; D+7</span>
+        <span class="arrow">&#x25BC;</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Objetivo:</strong> Alertar quando uma oportunidade fica 7 dias sem movimento no stage "Negociacao".</p>
+        <div class="flow-steps">
+          <span class="flow-step">Opp vai para Negociacao</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Aguarda 7 dias uteis</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Verifica se ainda esta la</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Cria tarefa de alerta</span>
+        </div>
+        <p>A tarefa sugere: verificar objecoes, reforcar proposta de valor, definir prazo ou considerar encerrar a negociacao.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><span class="wf-badge action">Acao: Cria opp Nutricao</span> 5. Venda Ganha &rarr; Pos-Venda</span>
+        <span class="arrow">&#x25BC;</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Objetivo:</strong> Quando uma venda e fechada (Won), criar oportunidade no pipeline de Nutricao para acompanhamento pos-venda.</p>
+        <div class="flow-steps">
+          <span class="flow-step">Opp status &rarr; Won</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Adiciona tag VENDA_GANHA</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Cria opp em Nutricao (Classificacao)</span>
+        </div>
+        <div class="info-box"><strong>Nota:</strong> A opp de Nutricao e criada com nome "<em>Nome - Pos-Venda</em>" e permite duplicadas para clientes que compram mais de uma vez.</div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><span class="wf-badge action">Acao: Cria opp Nutricao</span> 6. Perdido/Abandonado &rarr; Nutricao</span>
+        <span class="arrow">&#x25BC;</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Objetivo:</strong> Mover leads perdidos ou abandonados para o pipeline de Nutricao para futura reativacao.</p>
+        <div class="flow-steps">
+          <span class="flow-step">Opp status &rarr; Lost ou Abandoned</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Adiciona tag NUTRICAO_ATIVA</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Cria opp em Nutricao (Classificacao)</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Remove tag op_aberta</span>
+        </div>
+        <p><strong>Lost</strong> = lead que rejeitou ou foi rejeitado. <strong>Abandoned</strong> = lead que sumiu/nao respondeu. A diferenciacao aparece no nome da opp.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span><span class="wf-badge action">Acao: Cria opp Comercial</span> 6c. Requalificado volta ao Comercial</span>
+        <span class="arrow">&#x25BC;</span>
+      </div>
+      <div class="accordion-body">
+        <p><strong>Objetivo:</strong> Quando um lead em Nutricao atinge o stage "Requalificado", criar nova oportunidade no pipeline comercial de origem.</p>
+        <div class="flow-steps">
+          <span class="flow-step">Opp Nutricao &rarr; Requalificado</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Verifica pipeline de origem (tag)</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Cria opp no pipeline correto</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Tags: REQUALIFICADO + op_aberta</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Remove NUTRICAO_ATIVA</span>
+        </div>
+        <div class="info-box"><strong>Como funciona:</strong> O sistema usa tags de origem (ex: <code>origem_recrutamento</code>) para saber para qual pipeline devolver o lead.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REFERENCE -->
+<section id="referencia">
+  <div class="section-title">Referencia Tecnica</div>
+  <h2 class="section-heading">Tags e Campos</h2>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(event, 'tab-tags')">Tags (26)</button>
+    <button class="tab-btn" onclick="switchTab(event, 'tab-campos')">Campos (44)</button>
+    <button class="tab-btn" onclick="switchTab(event, 'tab-config')">Configuracoes</button>
+  </div>
+
+  <!-- TAGS TAB -->
+  <div id="tab-tags" class="tab-content active">
+    <table class="ref-table">
+      <thead><tr><th>Tag</th><th>Categoria</th><th>Uso</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag-pill produto">produto_recrutamento</span></td><td>Produto</td><td>Lead interessado em Recrutamento</td></tr>
+        <tr><td><span class="tag-pill produto">produto_outplacement</span></td><td>Produto</td><td>Lead interessado em Outplacement (C-Partner)</td></tr>
+        <tr><td><span class="tag-pill produto">produto_comunidade_senior</span></td><td>Produto</td><td>Lead interessado em Comunidade Senior</td></tr>
+        <tr><td><span class="tag-pill produto">produto_link</span></td><td>Produto</td><td>Lead interessado em Link</td></tr>
+        <tr><td><span class="tag-pill canal">canal_linkedin</span></td><td>Canal</td><td>Origem: LinkedIn</td></tr>
+        <tr><td><span class="tag-pill canal">canal_indicacao</span></td><td>Canal</td><td>Origem: Indicacao</td></tr>
+        <tr><td><span class="tag-pill canal">canal_evento</span></td><td>Canal</td><td>Origem: Evento</td></tr>
+        <tr><td><span class="tag-pill canal">canal_site</span></td><td>Canal</td><td>Origem: Site</td></tr>
+        <tr><td><span class="tag-pill canal">canal_parceiro</span></td><td>Canal</td><td>Origem: Parceiro</td></tr>
+        <tr><td><span class="tag-pill canal">canal_outbound</span></td><td>Canal</td><td>Origem: Outbound/Prospeccao ativa</td></tr>
+        <tr><td><span class="tag-pill status">LEAD_NOVO</span></td><td>Status</td><td>Lead recem-chegado</td></tr>
+        <tr><td><span class="tag-pill status">EM_QUALIFICACAO</span></td><td>Status</td><td>Lead sendo qualificado</td></tr>
+        <tr><td><span class="tag-pill status">PROPOSTA_ENVIADA</span></td><td>Status</td><td>Proposta enviada (adicionada pelo WF 3)</td></tr>
+        <tr><td><span class="tag-pill status">EM_NEGOCIACAO</span></td><td>Status</td><td>Lead em negociacao ativa</td></tr>
+        <tr><td><span class="tag-pill status">VENDA_GANHA</span></td><td>Status</td><td>Venda fechada (adicionada pelo WF 5)</td></tr>
+        <tr><td><span class="tag-pill status">PERDIDO</span></td><td>Status</td><td>Lead perdido</td></tr>
+        <tr><td><span class="tag-pill status">ABANDONADO</span></td><td>Status</td><td>Lead abandonou/nao respondeu</td></tr>
+        <tr><td><span class="tag-pill operacional">op_aberta</span></td><td>Operacional</td><td>Controle de opp unica (WF 1/1c)</td></tr>
+        <tr><td><span class="tag-pill operacional">NUTRICAO_ATIVA</span></td><td>Operacional</td><td>Lead em pipeline Nutricao (WF 6)</td></tr>
+        <tr><td><span class="tag-pill operacional">REQUALIFICADO</span></td><td>Operacional</td><td>Lead reativado com sucesso (WF 6c)</td></tr>
+        <tr><td><span class="tag-pill operacional">SLA_ESTOURADO</span></td><td>Operacional</td><td>SLA de 15min nao cumprido</td></tr>
+        <tr><td><span class="tag-pill operacional">FOLLOWUP_PENDENTE</span></td><td>Operacional</td><td>Follow-up aguardando acao</td></tr>
+        <tr><td><span class="tag-pill especial">ICP_SIM</span></td><td>Especial</td><td>Lead e ICP (perfil ideal)</td></tr>
+        <tr><td><span class="tag-pill especial">ICP_NAO</span></td><td>Especial</td><td>Lead nao e ICP</td></tr>
+        <tr><td><span class="tag-pill especial">URGENTE</span></td><td>Especial</td><td>Lead prioritario</td></tr>
+        <tr><td><span class="tag-pill especial">VIP</span></td><td>Especial</td><td>Lead/cliente VIP</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CAMPOS TAB -->
+  <div id="tab-campos" class="tab-content">
+    <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:16px">Campos de Contato (29)</h3>
+    <table class="ref-table">
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Descricao</th></tr></thead>
+      <tbody>
+        <tr><td>empresa</td><td>TEXT</td><td>Nome da empresa do contato</td></tr>
+        <tr><td>cargo</td><td>TEXT</td><td>Cargo do contato</td></tr>
+        <tr><td>segmento</td><td>SINGLE_OPTIONS</td><td>Segmento de atuacao</td></tr>
+        <tr><td>porte_empresa</td><td>SINGLE_OPTIONS</td><td>Micro/Pequena/Media/Grande</td></tr>
+        <tr><td>num_funcionarios</td><td>NUMERICAL</td><td>Numero de funcionarios</td></tr>
+        <tr><td>faturamento_anual</td><td>MONETORY</td><td>Faturamento anual</td></tr>
+        <tr><td>linkedin_url</td><td>TEXT</td><td>URL do perfil LinkedIn</td></tr>
+        <tr><td>site_empresa</td><td>TEXT</td><td>Website da empresa</td></tr>
+        <tr><td>endereco_empresa</td><td>LARGE_TEXT</td><td>Endereco completo</td></tr>
+        <tr><td>cidade</td><td>TEXT</td><td>Cidade</td></tr>
+        <tr><td>estado</td><td>SINGLE_OPTIONS</td><td>UF</td></tr>
+        <tr><td>canal_origem</td><td>SINGLE_OPTIONS</td><td>Canal de origem do lead</td></tr>
+        <tr><td>campanha_origem</td><td>TEXT</td><td>Campanha que trouxe o lead</td></tr>
+        <tr><td>data_primeiro_contato</td><td>DATE</td><td>Data do primeiro contato</td></tr>
+        <tr><td>responsavel_indicacao</td><td>TEXT</td><td>Quem indicou o lead</td></tr>
+        <tr><td>nivel_interesse</td><td>SINGLE_OPTIONS</td><td>Frio/Morno/Quente</td></tr>
+        <tr><td>icp_score</td><td>SINGLE_OPTIONS</td><td>Se o lead e ICP</td></tr>
+        <tr><td>observacoes_gerais</td><td>LARGE_TEXT</td><td>Notas e observacoes</td></tr>
+        <tr><td>telefone_celular</td><td>PHONE</td><td>Celular pessoal</td></tr>
+        <tr><td>telefone_comercial</td><td>PHONE</td><td>Telefone da empresa</td></tr>
+        <tr><td>decisor</td><td>SINGLE_OPTIONS</td><td>Se e decisor na empresa</td></tr>
+        <tr><td>necessidades_principais</td><td>MULTIPLE_OPTIONS</td><td>Dores e necessidades</td></tr>
+        <tr><td>produtos_interesse</td><td>MULTIPLE_OPTIONS</td><td>Produtos de interesse</td></tr>
+        <tr><td>concorrentes_atuais</td><td>TEXT</td><td>Fornecedores atuais</td></tr>
+        <tr><td>prazo_decisao</td><td>SINGLE_OPTIONS</td><td>Urgencia da decisao</td></tr>
+        <tr><td>orcamento_estimado</td><td>MONETORY</td><td>Budget disponivel</td></tr>
+        <tr><td>restricoes_contratuais</td><td>LARGE_TEXT</td><td>Restricoes contratuais</td></tr>
+        <tr><td>data_ultima_interacao</td><td>DATE</td><td>Ultimo contato registrado</td></tr>
+        <tr><td>motivo_perda</td><td>SINGLE_OPTIONS</td><td>Razao da perda (se lost)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin:32px 0 16px">Campos de Oportunidade (15)</h3>
+    <table class="ref-table">
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Descricao</th></tr></thead>
+      <tbody>
+        <tr><td>produto</td><td>SINGLE_OPTIONS</td><td>Produto negociado</td></tr>
+        <tr><td>valor_proposta</td><td>MONETORY</td><td>Valor da proposta</td></tr>
+        <tr><td>valor_negociado</td><td>MONETORY</td><td>Valor final negociado</td></tr>
+        <tr><td>data_proposta</td><td>DATE</td><td>Data de envio da proposta</td></tr>
+        <tr><td>data_fechamento_previsto</td><td>DATE</td><td>Previsao de fechamento</td></tr>
+        <tr><td>data_fechamento_real</td><td>DATE</td><td>Data real do fechamento</td></tr>
+        <tr><td>tipo_contrato</td><td>SINGLE_OPTIONS</td><td>Tipo de contrato</td></tr>
+        <tr><td>duracao_contrato</td><td>SINGLE_OPTIONS</td><td>Duracao do contrato</td></tr>
+        <tr><td>forma_pagamento</td><td>SINGLE_OPTIONS</td><td>Forma de pagamento</td></tr>
+        <tr><td>numero_vagas</td><td>NUMERICAL</td><td>Numero de vagas (Recrutamento)</td></tr>
+        <tr><td>nivel_cargo</td><td>SINGLE_OPTIONS</td><td>Nivel do cargo da vaga</td></tr>
+        <tr><td>area_atuacao</td><td>SINGLE_OPTIONS</td><td>Area de atuacao da vaga</td></tr>
+        <tr><td>sla_primeiro_contato</td><td>SINGLE_OPTIONS</td><td>Cumprido/Estourado</td></tr>
+        <tr><td>motivo_perda_opp</td><td>SINGLE_OPTIONS</td><td>Motivo da perda</td></tr>
+        <tr><td>notas_negociacao</td><td>LARGE_TEXT</td><td>Notas da negociacao</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CONFIG TAB -->
+  <div id="tab-config" class="tab-content">
+    <div class="check-grid">
+      <div class="check-item"><div class="check-icon">&#x2705;</div> Timezone: America/Sao_Paulo (GMT-03:00)</div>
+      <div class="check-item"><div class="check-icon">&#x2705;</div> Idioma: Portuguese (Brazil)</div>
+      <div class="check-item"><div class="check-icon">&#x2705;</div> Pais: Brazil</div>
+      <div class="check-item"><div class="check-icon">&#x2705;</div> Business Hours: Seg-Sex 08:00-18:00</div>
+      <div class="check-item"><div class="check-icon">&#x2705;</div> Sabado e Domingo: Indisponivel</div>
+      <div class="check-item"><div class="check-icon">&#x2705;</div> Duplicar oportunidades: Habilitado</div>
+      <div class="check-item"><div class="check-icon">&#x2705;</div> Round Robin: 4 membros, slots 30min</div>
+      <div class="check-item"><div class="check-icon">&#x2705;</div> Marketing Pipeline: Removido</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TEAM -->
+<section id="equipe">
+  <div class="section-title">Equipe</div>
+  <h2 class="section-heading">Usuarios configurados</h2>
+  <div class="team-grid">
+    <div class="team-card"><div class="team-avatar">C</div><h4>Carlos Mororo</h4><div class="role">Admin</div><div class="email">conta original</div></div>
+    <div class="team-card"><div class="team-avatar">G</div><h4>Graziele Nobre</h4><div class="role">Gestao Comercial</div><div class="email">graziele@triadeflow.com.br</div></div>
+    <div class="team-card"><div class="team-avatar">P</div><h4>Priscila Araujo</h4><div class="role">Comercial</div><div class="email">priscila@triadeflow.com.br</div></div>
+    <div class="team-card"><div class="team-avatar">G</div><h4>Gleniany Frota</h4><div class="role">Comercial</div><div class="email">gleniany@triadeflow.com.br</div></div>
+    <div class="team-card"><div class="team-avatar">A</div><h4>Ana Alice</h4><div class="role">Operacional</div><div class="email">anaalice@triadeflow.com.br</div></div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<div class="section-full"><section><div class="inner">
+  <div class="section-title">Checklist V1</div>
+  <h2 class="section-heading">Tudo configurado e pronto</h2>
+  <div class="check-grid">
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 44 Custom Fields (contato + oportunidade)</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 26 Tags padronizadas</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 5 Pipelines com etapas customizadas</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 8 Workflows publicados</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 5 Usuarios criados e ativos</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Round Robin configurado (4 membros)</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Business Hours (Seg-Sex 08-18h)</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Timezone America/Sao_Paulo</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Acoes Create Opportunity (Won + Lost)</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Bug triggers AND corrigido</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> 4 workflows testados e validados</div>
+    <div class="check-item"><div class="check-icon">&#x2705;</div> Marketing Pipeline removido</div>
+  </div>
+</div></section></div>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-title">Roadmap</div>
+  <h2 class="section-heading">Proximas fases do projeto</h2>
+  <div class="roadmap">
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline"><div class="roadmap-dot done">&#x2713;</div><div class="roadmap-line done"></div></div>
+      <div class="roadmap-card done"><div class="phase-label done">V1 &mdash; Concluido</div><h4>Infraestrutura CRM</h4><ul><li>44 campos + 26 tags + 5 pipelines</li><li>8 workflows automatizados</li><li>5 usuarios + Round Robin</li><li>Testes e validacao</li></ul></div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline"><div class="roadmap-dot current">2</div><div class="roadmap-line current"></div></div>
+      <div class="roadmap-card current"><div class="phase-label current">V2 &mdash; Proximo</div><h4>Pos-Venda &amp; Refinamento</h4><ul><li>Pipeline Pos-Venda (etapas de onboarding)</li><li>Acoes SLA automaticas (Cumprido/Estourado)</li><li>Testes com dados reais dos 4 workflows deferidos</li><li>Score de pre-qualificacao C-Partner</li><li>Treinamento da equipe no CRM</li></ul></div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline"><div class="roadmap-dot future">3</div><div class="roadmap-line future"></div></div>
+      <div class="roadmap-card future"><div class="phase-label future">V3 &mdash; Comunicacao</div><h4>WhatsApp &amp; Canais</h4><ul><li>Integracao WhatsApp Business</li><li>Unificacao de WhatsApps da equipe</li><li>Templates de mensagens por pipeline</li><li>Automacao de follow-up via WhatsApp</li></ul></div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline"><div class="roadmap-dot future">4</div><div class="roadmap-line future"></div></div>
+      <div class="roadmap-card future"><div class="phase-label future">V4 &mdash; Inteligencia</div><h4>BI &amp; Dashboards</h4><ul><li>Dashboard de metricas comerciais</li><li>Relatorios por pipeline/produto/consultor</li><li>Alertas inteligentes de performance</li><li>Previsao de receita (forecast)</li></ul></div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline"><div class="roadmap-dot future">5</div><div class="roadmap-line future" style="min-height:0;height:0"></div></div>
+      <div class="roadmap-card future"><div class="phase-label future">V5 &mdash; AI</div><h4>Automacao Inteligente</h4><ul><li>Bot de qualificacao automatica (Conversation AI)</li><li>Lead scoring com IA</li><li>Sugestoes automaticas de proxima acao</li><li>Integracao com plataformas de trafego</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT FORM -->
+<div class="section-dark" id="suporte">
+  <div class="support-section">
+    <div class="support-inner">
+      <div class="support-info">
+        <div class="section-title" style="color:var(--cyan)">Central de Suporte</div>
+        <h2>Reportar problema, duvida ou sugestao</h2>
+        <p>Use o formulario ao lado para enviar sua solicitacao. Ela sera registrada automaticamente no nosso sistema de gestao e a equipe Triadeflow recebera uma notificacao para tratar.</p>
+        <div class="support-categories">
+          <div class="support-cat">
+            <div class="support-cat-icon bug">&#x1F41B;</div>
+            <div class="support-cat-text"><h4>Bug</h4><p>Algo nao esta funcionando como deveria</p></div>
+          </div>
+          <div class="support-cat">
+            <div class="support-cat-icon duvida">&#x2753;</div>
+            <div class="support-cat-text"><h4>Duvida</h4><p>Preciso de ajuda para usar uma funcionalidade</p></div>
+          </div>
+          <div class="support-cat">
+            <div class="support-cat-icon ajuste">&#x1F527;</div>
+            <div class="support-cat-text"><h4>Ajuste</h4><p>Gostaria de alterar ou melhorar algo no CRM</p></div>
+          </div>
+          <div class="support-cat">
+            <div class="support-cat-icon sugestao">&#x1F4A1;</div>
+            <div class="support-cat-text"><h4>Sugestao</h4><p>Tenho uma ideia para o sistema</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="support-form" id="supportForm">
+        <h3>Novo chamado</h3>
+        <form id="ticketForm" onsubmit="submitTicket(event)">
+          <div class="form-row-grid">
+            <div class="form-row">
+              <label for="nome">Seu nome</label>
+              <input type="text" id="nome" name="nome" required placeholder="Ex: Carlos Mororo">
+            </div>
+            <div class="form-row">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" required placeholder="seu@email.com">
+            </div>
+          </div>
+          <div class="form-row-grid">
+            <div class="form-row">
+              <label for="categoria">Categoria</label>
+              <select id="categoria" name="categoria" required>
+                <option value="">Selecione...</option>
+                <option value="Bug">Bug - Algo nao funciona</option>
+                <option value="Duvida">Duvida - Preciso de ajuda</option>
+                <option value="Ajuste">Ajuste - Alterar/melhorar algo</option>
+                <option value="Sugestao">Sugestao - Tenho uma ideia</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="area">Area do CRM</label>
+              <select id="area" name="area" required>
+                <option value="">Selecione...</option>
+                <option value="Pipelines">Pipelines</option>
+                <option value="Workflows">Workflows / Automacoes</option>
+                <option value="Campos">Campos customizados</option>
+                <option value="Tags">Tags</option>
+                <option value="Usuarios">Usuarios / Permissoes</option>
+                <option value="Round Robin">Round Robin</option>
+                <option value="Contatos">Contatos / Oportunidades</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="assunto">Assunto</label>
+            <input type="text" id="assunto" name="assunto" required placeholder="Resumo do problema ou solicitacao">
+          </div>
+          <div class="form-row">
+            <label for="descricao">Descricao detalhada</label>
+            <textarea id="descricao" name="descricao" required placeholder="Descreva o que aconteceu, o que esperava e como reproduzir (se for bug). Quanto mais detalhes, mais rapido resolvemos."></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">Enviar chamado</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="check-big">&#x2705;</div>
+          <h3>Chamado enviado com sucesso!</h3>
+          <p>Sua solicitacao foi registrada no nosso sistema. A equipe Triadeflow ira analisar e responder em breve.</p>
+          <button onclick="resetForm()" style="margin-top:20px;padding:10px 24px;background:var(--navy);color:white;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer">Enviar outro chamado</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHANNELS -->
+<div class="channels">
+  <div class="section-title" style="color:var(--blue)">Contato Direto</div>
+  <h2 class="section-heading">Canais de comunicacao</h2>
+  <div class="channels-grid">
+    <a href="https://wa.me/5519983805908?text=Ol%C3%A1%21+Vim+pelo+portal+do+CRM+Grupo+Camarmo.+Gostaria+de+mais+informa%C3%A7%C3%B5es." target="_blank" class="channel-card">
+      <div class="channel-icon whatsapp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+      <div class="channel-info"><div class="channel-name">WhatsApp</div><div class="channel-handle">(19) 98380-5908</div></div>
+    </a>
+    <a href="https://www.instagram.com/triadeflow/" target="_blank" class="channel-card">
+      <div class="channel-icon instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+      <div class="channel-info"><div class="channel-name">Instagram</div><div class="channel-handle">@triadeflow</div></div>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <img src="https://framerusercontent.com/images/7Gv47xcO60eIP4POWObsZ3TiQ.png" alt="Triadeflow" class="footer-logo">
+  <p>Implementado por <strong><a href="https://triadeflow.ai">Triadeflow</a></strong> &mdash; Metodologia TDI&trade; (Triadeflow Digital Implementation)</p>
+  <p style="margin-top: 8px;"><a href="https://hub.triadeflow.ai" style="color:rgba(255,255,255,0.6)">hub.triadeflow.ai</a> &mdash; Portal CRM V1 &mdash; Marco 2026</p>
+</div>
+
+<script>
+// Accordion
+document.querySelectorAll('.accordion-header').forEach(function(header) {
+  header.addEventListener('click', function() {
+    var item = this.parentElement;
+    item.classList.toggle('open');
+  });
+});
+
+// Tabs
+function switchTab(event, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(btn) { btn.classList.remove('active'); });
+  document.querySelectorAll('.tab-content').forEach(function(tc) { tc.classList.remove('active'); });
+  event.target.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// Nav active state on scroll
+var sections = document.querySelectorAll('section[id], div[id]');
+window.addEventListener('scroll', function() {
+  var scrollPos = window.scrollY + 100;
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    var section = document.querySelector(link.getAttribute('href'));
+    if (section && section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
+      document.querySelectorAll('.nav-links a').forEach(function(l) { l.classList.remove('active'); });
+      link.classList.add('active');
+    }
+  });
+});
+
+// Form submission - sends to Asana via n8n webhook
+// WEBHOOK_URL will be configured when n8n workflow is created
+var WEBHOOK_URL = 'https://primary-production-9b0e9.up.railway.app/webhook/camarmo-suporte';
+
+function submitTicket(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  var data = {
+    nome: document.getElementById('nome').value,
+    email: document.getElementById('email').value,
+    categoria: document.getElementById('categoria').value,
+    area: document.getElementById('area').value,
+    assunto: document.getElementById('assunto').value,
+    descricao: document.getElementById('descricao').value,
+    cliente: 'Grupo Camarmo',
+    projeto_asana: '1213558019741826',
+    timestamp: new Date().toISOString()
+  };
+
+  fetch(WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+    mode: 'no-cors'
+  }).then(function() {
+    document.getElementById('ticketForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    document.querySelector('.support-form h3').style.display = 'none';
+  }).catch(function() {
+    document.getElementById('ticketForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    document.querySelector('.support-form h3').style.display = 'none';
+  });
+}
+
+function resetForm() {
+  document.getElementById('ticketForm').style.display = 'block';
+  document.getElementById('formSuccess').style.display = 'none';
+  document.querySelector('.support-form h3').style.display = 'block';
+  document.getElementById('ticketForm').reset();
+  document.getElementById('submitBtn').disabled = false;
+  document.getElementById('submitBtn').textContent = 'Enviar chamado';
+}
+</script>
+
+</body>
+</html>
